@@ -1,4 +1,4 @@
-const Users =  require('./users.model')
+const Users =  require('./users.models')
 const  Movies = require('./movies.models')
 const  Episodes = require('./episodes.models')
 const  Genres = require('./genres.models')
@@ -25,8 +25,6 @@ const initModels = () => {
     //* Seasons -> Episodes
     Seasons.hasMany(Episodes)
     Episodes.belongsTo(Seasons)
-
-    
 }
 
 module.exports = initModels

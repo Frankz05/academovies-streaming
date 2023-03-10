@@ -4,11 +4,12 @@ const handleResponses =  require('./utils/handleResponses')
 const db = require('./utils/database')
 const initModels = require('./models/initModels')
 const config = require('../config').api
+const upload = require('./utils/multer')
 
 
 const userRouter = require('./users/user.router')
 const authRouter = require('./auth/auth.router')
-
+const moviesRouter = require('./movies/movies.router')
 
 const app = express()
 
@@ -39,7 +40,7 @@ app.get('/', (req, res) => {
 
 app.use('/api/v1/users', userRouter )
 app.use('/api/v1/auth', authRouter)
-
+app.use('/api/v1/movies', moviesRouter)
 
 app.use('*', (req, res) => {
     handleResponses.error({
@@ -50,4 +51,15 @@ app.use('*', (req, res) => {
 })
 app.listen( config.port, () => {
     console.log(`Server started at port ${config.port}`);
+})
+
+
+
+
+
+
+//? Ruta de ejemplo para subir imagenes
+app.post('/upload-file',upload.fields([{name: 'coverImage', maxCount: 1}, {name: 'movieVideo', maxCount: 1}]), (req, res) => {
+    const file = req.files
+    res.status(200).json({file})
 })

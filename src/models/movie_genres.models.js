@@ -5,7 +5,7 @@ const db = require("../utils/database");
 const Genres = require('./genres.models')
 const Movies = require('./movies.models')
 
-const MovieGenres = db.define( movie_genres, {
+const MovieGenres = db.define( 'movie_genres', {
     id: {
         type: DataTypes.UUID,
         primaryKey: true,
@@ -19,7 +19,7 @@ const MovieGenres = db.define( movie_genres, {
         }
     },
     genresId: {
-        type: DataTypes.UUID,
+        type: DataTypes.INTEGER,
         allowNull: false,
         references: {
             model: Genres,

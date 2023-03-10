@@ -23,3 +23,8 @@ const createMovie = async (movieObj) => {
     const data = await Movies.create(newMovie)
     return data
 }
+
+module.exports = {
+    findAllMovies,
+    createMovie
+}
