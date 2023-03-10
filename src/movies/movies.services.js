@@ -56,7 +56,52 @@ const postMovies = async(req, res) => {
     }
 }
 
+const postGenreToMovie = (req, res) =>{
+    const {movieId, genreId} = req.params
+
+    movieControllers.addGenreToMovie({movieId, genreId})
+        .then( data =>{
+            responses.success({
+                res,
+                status:201,
+                message: 'Genre added to movie successfully',
+                data
+            })
+        })
+        .catch( err =>{
+            responses.error({
+                res,
+                status:400,
+                message: err.message,
+                data: err
+            })
+        })
+}
+
+const getAllMoviesByGenre = (req, res) => {
+    const genreId = req.params.genreId
+    movieControllers.findAllMoviesByGenre(genreId)
+        .then( data => {
+            responses.success({
+                res,
+                status: 200,
+                data,
+                message: 'Getting all the movies'
+            })
+        })
+        .catch( err => {
+            responses.error({
+                res,
+                status: 400,
+                data: err,
+                message: 'Something bad getting the movies'
+            })
+        })
+}
+
 module.exports = {
     getAllMovies,
-    postMovies
+    postMovies,
+    postGenreToMovie,
+    getAllMoviesByGenre
 }
