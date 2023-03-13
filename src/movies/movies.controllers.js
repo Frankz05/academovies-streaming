@@ -8,10 +8,10 @@ const findAllMovies = async (limit, offset) => {
     //*offset = desde donde empiezo a mostrar
 
     const queryOptions = {
-        limit: limit || 20,
-        offset: offset || 0
+        limit: limit,
+        offset: offset
     }
-    const data = await Movies.findAndCountAll()
+    const data = await Movies.findAndCountAll(queryOptions)
     return data
 }
 
