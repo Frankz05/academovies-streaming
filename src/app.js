@@ -28,7 +28,7 @@ db.sync()
 initModels()
 
 app.get('/', (req, res) => {
-    responseHandlers.success({
+    handleResponses.success({
         res,
         status: 200,
         message: 'Servidor inicializado correctamente',
